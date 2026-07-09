@@ -9,13 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="JobSerivce" />
       </profile>
-      <profile name="Annotation profile for CompanyService" enabled="true">
+      <profile name="Annotation profile for ReviewServices" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
+        <module name="ReviewServices" />
         <module name="CompanyService" />
       </profile>
     </annotationProcessing>
@@ -24,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="CompanyService" options="-parameters" />
       <module name="JobSerivce" options="-parameters" />
+      <module name="ReviewServices" options="-parameters" />
     </option>
   </component>
 </project>
