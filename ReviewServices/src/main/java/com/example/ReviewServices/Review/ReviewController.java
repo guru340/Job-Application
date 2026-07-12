@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/companies/{companiesId}")
+@RequestMapping("/reviews")
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewServices reviewServices;
 
     @GetMapping
-    public ResponseEntity<List<Review>> getALlReview(@RequestParam Long companiesId){
-        return new ResponseEntity<>(reviewServices.getAllReviews(companiesId), HttpStatus.OK);
+    public ResponseEntity<List<Review>> getALlReview(@RequestParam Long companyId){
+        return new ResponseEntity<>(reviewServices.getAllReviews(companyId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<String> addReviews(@RequestParam Long companiesId,@RequestBody Review review){
-        boolean isreviewed=reviewServices.addReview(companiesId,review);
+    public ResponseEntity<String> addReviews(@RequestParam Long companyId,@RequestBody Review review){
+        boolean isreviewed=reviewServices.addReview(companyId,review);
         if(isreviewed){
             return new ResponseEntity<>("Review Added Successfully",HttpStatus.OK);
 

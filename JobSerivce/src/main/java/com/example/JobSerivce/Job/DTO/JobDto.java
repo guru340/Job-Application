@@ -1,11 +1,13 @@
 package com.example.JobSerivce.Job.DTO;
 
-import com.example.JobSerivce.Job.Job;
 import com.example.JobSerivce.Job.external.Company;
+import com.example.JobSerivce.Job.external.Review;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class JobWIthCompany {
+public class JobDto {
 //        private Job job;
         private Long id;
         private String title;
@@ -14,4 +16,5 @@ public class JobWIthCompany {
         private String minsalary;
         private String location;
         private Company company;
+        private List<Review> reviews;
     }

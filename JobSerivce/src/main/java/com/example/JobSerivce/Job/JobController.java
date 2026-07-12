@@ -1,6 +1,6 @@
 package com.example.JobSerivce.Job;
 
-import com.example.JobSerivce.Job.DTO.JobWIthCompany;
+import com.example.JobSerivce.Job.DTO.JobDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class JobController {
     private final JobService jobService;
 
     @GetMapping
-    public ResponseEntity<List<JobWIthCompany>> getallUser(){
+    public ResponseEntity<List<JobDto>> getallUser(){
         return ResponseEntity.ok(jobService.fetchallJobs());
     }
 
@@ -28,8 +28,8 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JobWIthCompany> getjobbyId(@PathVariable  Long id){
-        JobWIthCompany jobwithCompany=jobService.getJobById(id);
+    public ResponseEntity<JobDto> getjobbyId(@PathVariable  Long id){
+        JobDto jobwithCompany=jobService.getJobById(id);
         if (jobwithCompany!=null){
             return new ResponseEntity<>(jobwithCompany, HttpStatus.OK);
         }
