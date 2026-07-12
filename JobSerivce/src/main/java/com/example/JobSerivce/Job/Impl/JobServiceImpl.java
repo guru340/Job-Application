@@ -5,6 +5,8 @@ import com.example.JobSerivce.Job.DTO.JobDto;
 import com.example.JobSerivce.Job.Job;
 import com.example.JobSerivce.Job.JobRepo;
 import com.example.JobSerivce.Job.JobService;
+import com.example.JobSerivce.Job.clients.CompanyClient;
+import com.example.JobSerivce.Job.clients.ReviewClient;
 import com.example.JobSerivce.Job.external.Company;
 import com.example.JobSerivce.Job.external.Review;
 import com.example.JobSerivce.Job.mapper.JobMapper;
@@ -32,6 +34,12 @@ public class JobServiceImpl implements JobService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    private CompanyClient companyClient;
+
+    @Autowired
+    private ReviewClient reviewClient;
+
     @Override
     public List<JobDto> fetchallJobs() {
         List<Job> jobs = jobRepo.findAll();
@@ -46,16 +54,18 @@ public class JobServiceImpl implements JobService {
 
     private JobDto convertToDto(Job job){
 
+        Company company=companyClient.getCompany(job.getCompanyId());
+        List<Review> reviews = reviewClient.getReviews(job.getCompanyId());
 
-        Company company = restTemplate.getForObject(
-                "http://COMPANYSERVICE:8082/companies/" + job.getCompanyId(),
-                Company.class);
+//        Company company = restTemplate.getForObject(
+//                "http://COMPANYSERVICE:8082/companies/" + job.getCompanyId(),
+//                Company.class);
 
-     ResponseEntity<List<Review>> Reviewresponse= restTemplate.exchange("http://REVIEWSERVICES:8083/reviews?companyId=" + job.getCompanyId(),
-                HttpMethod.GET, null, new ParameterizedTypeReference<List<Review>>() {
-                });
-
-     List<Review> reviews=Reviewresponse.getBody();
+//     ResponseEntity<List<Review>> Reviewresponse= restTemplate.exchange("http://REVIEWSERVICES:8083/reviews?companyId=" + job.getCompanyId(),
+//                HttpMethod.GET, null, new ParameterizedTypeReference<List<Review>>() {
+//                });
+//
+//     List<Review> reviews=Reviewresponse.getBody();
         JobDto jobDto = JobMapper.mappertoJOb(job,company,reviews);
 //        jobDto.setCompany(company);
 
