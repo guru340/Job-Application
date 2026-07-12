@@ -1,5 +1,6 @@
 package com.example.JobSerivce.Job;
 
+import com.example.JobSerivce.Job.DTO.JobWIthCompany;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class JobController {
     private final JobService jobService;
 
     @GetMapping
-    public ResponseEntity<List<Job>> getallUser(){
+    public ResponseEntity<List<JobWIthCompany>> getallUser(){
         return ResponseEntity.ok(jobService.fetchallJobs());
     }
 

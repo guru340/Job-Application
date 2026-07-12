@@ -1,12 +1,16 @@
 package com.example.JobSerivce.Job.Impl;
 
 
+import com.example.JobSerivce.Job.DTO.JobWIthCompany;
 import com.example.JobSerivce.Job.Job;
 import com.example.JobSerivce.Job.JobRepo;
 import com.example.JobSerivce.Job.JobService;
+import com.example.JobSerivce.Job.external.Company;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +22,25 @@ public class JobServiceImpl implements JobService {
     private final JobRepo jobRepo;
     private Long NextId =1L;
     @Override
-    public List<Job> fetchallJobs() {
-        return jobRepo.findAll();
+    public List<JobWIthCompany> fetchallJobs() {
+        List<Job> jobs = jobRepo.findAll();
+        List<JobWIthCompany> jobWithCompanyDTOs = new ArrayList<>();
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        for (Job job : jobs) {
+            JobWIthCompany jobWithCompanyDTO = new JobWIthCompany();
+            jobWithCompanyDTO.setJob(job);
+
+            Company company = restTemplate.getForObject(
+                    "http://localhost:8082/companies/" + job.getCompanyId(),
+                    Company.class);
+            jobWithCompanyDTO.setCompany(company);
+
+            jobWithCompanyDTOs.add(jobWithCompanyDTO);
+        }
+
+        return jobWithCompanyDTOs;
     }
 
     @Override
