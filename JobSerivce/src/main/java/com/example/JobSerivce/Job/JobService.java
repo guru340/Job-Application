@@ -9,7 +9,7 @@ public interface JobService {
     List<JobWIthCompany> fetchallJobs();
     void createJob(Job job);
 
-    Job getJobById(Long id);
+    JobWIthCompany getJobById(Long id);
     boolean deleteJobById(Long id);
 
     boolean updatejob(Long id, Job updatejob);
