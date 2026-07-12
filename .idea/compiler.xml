@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="eureka-Server" />
         <module name="JobSerivce" />
       </profile>
       <profile name="Annotation profile for ReviewServices" enabled="true">
@@ -26,6 +27,7 @@
       <module name="CompanyService" options="-parameters" />
       <module name="JobSerivce" options="-parameters" />
       <module name="ReviewServices" options="-parameters" />
+      <module name="eureka-Server" options="-parameters" />
     </option>
   </component>
 </project>
