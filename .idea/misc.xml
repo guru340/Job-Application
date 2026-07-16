@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/ReviewServices/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-Server/pom.xml" />
         <option value="$PROJECT_DIR$/ConfigServer/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
       </list>
     </option>
   </component>
