@@ -11,6 +11,7 @@ import com.example.JobSerivce.Job.external.Company;
 import com.example.JobSerivce.Job.external.Review;
 import com.example.JobSerivce.Job.mapper.JobMapper;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -41,6 +42,7 @@ public class JobServiceImpl implements JobService {
     private ReviewClient reviewClient;
 
     @Override
+    @CircuitBreaker(name = "companyBreaker")
     public List<JobDto> fetchallJobs() {
         List<Job> jobs = jobRepo.findAll();
         List<JobDto> jobWithCompanyDTOs = new ArrayList<>();
