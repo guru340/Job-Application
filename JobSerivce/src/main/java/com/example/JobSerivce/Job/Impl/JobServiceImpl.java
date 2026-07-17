@@ -12,6 +12,7 @@ import com.example.JobSerivce.Job.external.Review;
 import com.example.JobSerivce.Job.mapper.JobMapper;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -40,10 +41,13 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     private ReviewClient reviewClient;
+    int attempt=0;
 
     @Override
-    @CircuitBreaker(name = "companyBreaker")
+//    @CircuitBreaker(name = "companyBreaker",fallbackMethod = "fallbackForJob")
+    @Retry(name = "companyBreaker",fallbackMethod = "fallbackForJob")
     public List<JobDto> fetchallJobs() {
+        System.out.println("Attempted"+ ++attempt);
         List<Job> jobs = jobRepo.findAll();
         List<JobDto> jobWithCompanyDTOs = new ArrayList<>();
 
@@ -84,13 +88,15 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    @CircuitBreaker(name = "companyBreaker",fallbackMethod = "fallbackForJob")
+
     public JobDto getJobById(Long id) {
        Job job= jobRepo.findById(id).orElse(null);
         return convertToDto(job);
     }
-    public String fallbackForJob(Throwable t) {
-        return "Fallback data: Service is currently unavailable.";
+    public List<String> fallbackForJob(Throwable t) {
+        List<String> list=new ArrayList<>();
+        list.add( "Fallback data: Service is currently unavailable.");
+        return list;
     }
     @Override
     public boolean deleteJobById(Long id) {
