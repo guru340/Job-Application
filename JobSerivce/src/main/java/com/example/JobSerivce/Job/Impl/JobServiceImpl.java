@@ -84,11 +84,14 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @CircuitBreaker(name = "companyBreaker",fallbackMethod = "fallbackForJob")
     public JobDto getJobById(Long id) {
        Job job= jobRepo.findById(id).orElse(null);
         return convertToDto(job);
     }
-
+    public String fallbackForJob(Throwable t) {
+        return "Fallback data: Service is currently unavailable.";
+    }
     @Override
     public boolean deleteJobById(Long id) {
         try {
