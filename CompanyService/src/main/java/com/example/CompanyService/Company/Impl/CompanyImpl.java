@@ -5,6 +5,7 @@ package com.example.CompanyService.Company.Impl;
 import com.example.CompanyService.Company.Company;
 import com.example.CompanyService.Company.CompanyRepo;
 import com.example.CompanyService.Company.CompanyServices;
+import com.example.CompanyService.Company.dto.ReviewMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,11 @@ public class CompanyImpl implements CompanyServices {
     @Override
     public Company getcomapnybyId(Long id) {
         return companyRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public void updateRating(ReviewMessage reviewMessage) {
+
     }
 
 
