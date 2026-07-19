@@ -1,5 +1,6 @@
 package com.example.ReviewServices.Review;
 
+import com.example.ReviewServices.Review.Messaging.ReviewMessageProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewServices reviewServices;
+    private final ReviewMessageProducer reviewMessageProducer;
 
     @GetMapping
     public ResponseEntity<List<Review>> getALlReview(@RequestParam Long companyId){
@@ -22,6 +24,7 @@ public class ReviewController {
     public ResponseEntity<String> addReviews(@RequestParam Long companyId,@RequestBody Review review){
         boolean isreviewed=reviewServices.addReview(companyId,review);
         if(isreviewed){
+            reviewMessageProducer.sendMessage(review);
             return new ResponseEntity<>("Review Added Successfully",HttpStatus.OK);
 
         }

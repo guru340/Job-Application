@@ -4,8 +4,10 @@ import com.example.ReviewServices.Review.Review;
 import com.example.ReviewServices.Review.dto.ReviewMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
+@Service
 public class ReviewMessageProducer {
     private final RabbitTemplate rabbitTemplate;
 
