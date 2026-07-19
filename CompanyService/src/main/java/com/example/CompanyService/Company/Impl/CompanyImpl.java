@@ -5,7 +5,9 @@ package com.example.CompanyService.Company.Impl;
 import com.example.CompanyService.Company.Company;
 import com.example.CompanyService.Company.CompanyRepo;
 import com.example.CompanyService.Company.CompanyServices;
+import com.example.CompanyService.Company.clients.ReviewClient;
 import com.example.CompanyService.Company.dto.ReviewMessage;
+import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class CompanyImpl implements CompanyServices {
 
     private final CompanyRepo companyRepo;
+
+    private final ReviewClient reviewClient;
 
     @Override
     public List<Company> fetchallCompany() {
@@ -59,7 +63,12 @@ public class CompanyImpl implements CompanyServices {
 
     @Override
     public void updateRating(ReviewMessage reviewMessage) {
+        System.out.println(reviewMessage.getCompanyId());
+        Company company=companyRepo.findById(reviewMessage.getCompanyId()).orElseThrow(()->new NotFoundException("company not found"+ reviewMessage.getCompanyId()));
 
+        double averageRating=reviewClient.getAverageRatingForCompany(reviewMessage.getCompanyId());
+        company.setRating(averageRating);
+        companyRepo.save(company);
     }
 
 

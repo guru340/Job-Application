@@ -4,8 +4,10 @@ import com.example.CompanyService.Company.CompanyServices;
 import com.example.CompanyService.Company.dto.ReviewMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
+@Service
 public class ReviewMessageConsumer {
     private final CompanyServices companyServices;
 
