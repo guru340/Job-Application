@@ -8,7 +8,7 @@ import lombok.Data;
 public class ReviewMessage {
     private Long id;
     private String title;
-    private String Description;
+    private String description;
     private double rating;
     private Long companyId;
 }
