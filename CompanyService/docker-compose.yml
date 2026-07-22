@@ -78,7 +78,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
 
   gateway:
-    image: mayanksangwani/gateway:latest
+    image: mayanksangwani/gateway:latest1
     ports:
       - 8084:8084
     depends_on:
