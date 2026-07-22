@@ -92,7 +92,7 @@ services:
 
 
   companyservice:
-    image: mayanksangwani/companyservice:latest
+    image: mayanksangwani/companyservice:latest1
     container_name: company
     ports:
       - 8082:8082
@@ -106,7 +106,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
 
   jobserivce:
-    image: mayanksangwani/jobserivce:latest
+    image: mayanksangwani/jobserivce:latest1
     container_name: job
     ports:
       - 8081:8081
@@ -121,7 +121,7 @@ services:
 
 
   reviewservice:
-    image: mayanksangwani/reviewservice:latest
+    image: mayanksangwani/reviewservice:latest1
     container_name: review
     ports:
       - 8083:8083
