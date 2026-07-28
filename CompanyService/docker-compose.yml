@@ -99,11 +99,21 @@ services:
     depends_on:
       - servicereg
       - configserver
+      - postgres
+      - rabbitmq
     networks:
       - microservice-network
       - postgres
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_CLOUD_CONFIG_RETRY_MAX_INTERVAL=10000
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servicereg:8761/eureka/
+      - JOB_SERVICE_URL=http://job:8081
+      - COMPANY_SERVICE_URL=http://company:8082
+      - REVIEW_SERVICE_URL=http://review:8083
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - MANAGEMENT_TRACING_EXPORT_ZIPKIN_ENDPOINT=http://zipkin:9411/api/v2/spans
 
   jobserivce:
     image: mayanksangwani/jobserivce:latest2
@@ -113,11 +123,19 @@ services:
     depends_on:
       - servicereg
       - configserver
+      - postgres
     networks:
       - microservice-network
       - postgres
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_CLOUD_CONFIG_RETRY_MAX_INTERVAL=10000
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servicereg:8761/eureka/
+      - JOB_SERVICE_URL=http://job:8081
+      - COMPANY_SERVICE_URL=http://company:8082
+      - REVIEW_SERVICE_URL=http://review:8083
+      - MANAGEMENT_TRACING_EXPORT_ZIPKIN_ENDPOINT=http://zipkin:9411/api/v2/spans
 
 
   reviewservice:
@@ -128,11 +146,21 @@ services:
     depends_on:
       - servicereg
       - configserver
+      - postgres
+      - rabbitmq
     networks:
       - microservice-network
       - postgres
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_CLOUD_CONFIG_RETRY_MAX_INTERVAL=10000
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servicereg:8761/eureka/
+      - JOB_SERVICE_URL=http://job:8081
+      - COMPANY_SERVICE_URL=http://company:8082
+      - REVIEW_SERVICE_URL=http://review:8083
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - MANAGEMENT_TRACING_EXPORT_ZIPKIN_ENDPOINT=http://zipkin:9411/api/v2/spans
 
 
 
