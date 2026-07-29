@@ -218,7 +218,7 @@ mvn test
 
 **Mayank Sangwani**
 
-GitHub: https://github.com/guru340
+GitHub: [https://github.com/guru340](https://github.com/guru340/Job-Application.git)
 
 ---
 
