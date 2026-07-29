@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job App Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div>
+        <p class="eyebrow">Job App</p>
+        <h1>Hiring Operations</h1>
+      </div>
+      <nav class="nav-tabs" aria-label="Primary views">
+        <button class="nav-tab active" data-view="jobs" type="button">Jobs</button>
+        <button class="nav-tab" data-view="companies" type="button">Companies</button>
+        <button class="nav-tab" data-view="reviews" type="button">Reviews</button>
+      </nav>
+      <div class="connection">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="connection-text">Checking backend</span>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Gateway</p>
+          <h2 id="view-title">Jobs</h2>
+        </div>
+        <div class="api-control">
+          <label for="api-base">API base</label>
+          <input id="api-base" type="url" value="http://localhost:8084" />
+          <button id="save-api" class="icon-button" title="Save API base" type="button">Save</button>
+        </div>
+      </header>
+
+      <section class="notice hidden" id="notice" role="status"></section>
+
+      <section class="summary-grid" aria-label="Summary">
+        <div class="summary-item">
+          <span>Jobs</span>
+          <strong id="job-count">0</strong>
+        </div>
+        <div class="summary-item">
+          <span>Companies</span>
+          <strong id="company-count">0</strong>
+        </div>
+        <div class="summary-item">
+          <span>Average Rating</span>
+          <strong id="rating-average">0.0</strong>
+        </div>
+      </section>
+
+      <section class="content-view active" id="jobs-view">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Open Roles</h3>
+            <button id="refresh-jobs" type="button">Refresh</button>
+          </div>
+          <div class="list" id="jobs-list"></div>
+        </div>
+
+        <form class="panel form-panel" id="job-form">
+          <h3 id="job-form-title">Create Job</h3>
+          <input type="hidden" id="job-id" />
+          <label>Title <input id="job-title" required /></label>
+          <label>Company <select id="job-company" required></select></label>
+          <label>Location <input id="job-location" required /></label>
+          <div class="two-col">
+            <label>Min Salary <input id="job-minsalary" /></label>
+            <label>Max Salary <input id="job-maxsalary" /></label>
+          </div>
+          <label>Description <textarea id="job-description" rows="5" required></textarea></label>
+          <div class="form-actions">
+            <button type="button" class="ghost hidden" id="cancel-job-edit">Cancel</button>
+            <button type="submit">Save Job</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="content-view" id="companies-view">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Companies</h3>
+            <button id="refresh-companies" type="button">Refresh</button>
+          </div>
+          <div class="list" id="companies-list"></div>
+        </div>
+
+        <form class="panel form-panel" id="company-form">
+          <h3 id="company-form-title">Create Company</h3>
+          <input type="hidden" id="company-id" />
+          <label>Name <input id="company-name" required /></label>
+          <label>Rating <input id="company-rating" type="number" min="0" max="5" step="0.1" /></label>
+          <label>Description <textarea id="company-description" rows="6" required></textarea></label>
+          <div class="form-actions">
+            <button type="button" class="ghost hidden" id="cancel-company-edit">Cancel</button>
+            <button type="submit">Save Company</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="content-view" id="reviews-view">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Company Reviews</h3>
+            <select id="review-company-filter"></select>
+          </div>
+          <div class="list" id="reviews-list"></div>
+        </div>
+
+        <form class="panel form-panel" id="review-form">
+          <h3 id="review-form-title">Create Review</h3>
+          <input type="hidden" id="review-id" />
+          <label>Company <select id="review-company" required></select></label>
+          <label>Title <input id="review-title" required /></label>
+          <label>Rating <input id="review-rating" type="number" min="0" max="5" step="0.1" required /></label>
+          <label>Description <textarea id="review-description" rows="5" required></textarea></label>
+          <div class="form-actions">
+            <button type="button" class="ghost hidden" id="cancel-review-edit">Cancel</button>
+            <button type="submit">Save Review</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

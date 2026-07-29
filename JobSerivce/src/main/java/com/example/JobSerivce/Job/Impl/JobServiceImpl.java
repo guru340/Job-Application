@@ -95,6 +95,9 @@ public class JobServiceImpl implements JobService {
 
     public JobDto getJobById(Long id) {
        Job job= jobRepo.findById(id).orElse(null);
+       if (job == null) {
+           return null;
+       }
         return convertToDto(job);
     }
     public List<String> fallbackForJob(Throwable t) {
@@ -117,12 +120,13 @@ public class JobServiceImpl implements JobService {
 
             if(optionalJob.isPresent()){
                 Job job=optionalJob.get();
-                job.setId(updatejob.getId());
                 job.setDescription(updatejob.getDescription());
                 job.setTitle(updatejob.getTitle());
                 job.setLocation(updatejob.getLocation());
                 job.setMaxsalary(updatejob.getMaxsalary());
                 job.setMinsalary(updatejob.getMinsalary());
+                job.setCompanyId(updatejob.getCompanyId());
+                jobRepo.save(job);
                 return true;
 
             }

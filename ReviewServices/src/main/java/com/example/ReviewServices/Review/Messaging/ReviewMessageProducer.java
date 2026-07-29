@@ -3,6 +3,7 @@ package com.example.ReviewServices.Review.Messaging;
 import com.example.ReviewServices.Review.Review;
 import com.example.ReviewServices.Review.dto.ReviewMessage;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,10 @@ public class ReviewMessageProducer {
         reviewMessage.setDescription(review.getDescription());
         reviewMessage.setTitle(review.getTitle());
         reviewMessage.setRating(review.getRating());
-        rabbitTemplate.convertAndSend("companyRatingQueue",reviewMessage);
+        try {
+            rabbitTemplate.convertAndSend("companyRatingQueue",reviewMessage);
+        } catch (AmqpException exception) {
+            System.out.println("RabbitMQ unavailable; review saved without rating event.");
+        }
     }
 }

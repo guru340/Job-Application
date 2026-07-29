@@ -32,10 +32,10 @@ public class CompanyImpl implements CompanyServices {
         Optional<Company> companyOptional=companyRepo.findById(id);
         if(companyOptional.isPresent()){
             Company Tocompany=companyOptional.get();
-            Tocompany.setId(company.getId());
-
             Tocompany.setName(company.getName());
             Tocompany.setDescription(company.getDescription());
+            Tocompany.setRating(company.getRating());
+            companyRepo.save(Tocompany);
             return true;
         }
         return false;

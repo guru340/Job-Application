@@ -42,13 +42,12 @@ public class ReviewImpl implements ReviewServices {
     @Override
     public boolean updateReview(Long reviewId, Review updatedReview) {
         Review review=ReviewRepo.findById(reviewId).orElse(null);
-        if (reviewId != null){
+        if (review != null){
             review.setTitle(updatedReview.getTitle());
-            review.setId(updatedReview.getId());
             review.setDescription(updatedReview.getDescription());
             review.setCompanyId(updatedReview.getCompanyId());
             review.setRating(updatedReview.getRating());
-            ReviewRepo.save(updatedReview);
+            ReviewRepo.save(review);
             return true;
         } else {
             return false;
