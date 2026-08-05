@@ -222,4 +222,4 @@ GitHub: https://github.com/guru340/Job-Application.git
 
 ---
 
-⭐ If you found this project helpful, consider giving it a Star on GitHub!
+⭐ If you found this project helpful, consider giving it a Star on GitHub!!
