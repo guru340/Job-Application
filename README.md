@@ -1,5 +1,5 @@
 # Job Application Tracker
-
+//
 A production-oriented **Job Application Tracking System** built using **Spring Boot**, designed to simplify and organize the job search process. The application enables users to manage job applications, companies, interviews, and application statuses through a clean RESTful API architecture following industry-standard backend development practices.
 
 ## Overview
