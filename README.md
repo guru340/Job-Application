@@ -23,7 +23,7 @@ This application helps job seekers efficiently track their applications from sub
 ## Tools
 - Git
 - Postman
-- Docker *(Optional)*
+- Docker 
 
 ---
 
