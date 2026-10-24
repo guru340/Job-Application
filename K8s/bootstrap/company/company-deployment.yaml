@@ -22,7 +22,7 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
-      restartPolicy: Always
+      restartPolicy: Always.
   selector:
     matchLabels:
       app: company
